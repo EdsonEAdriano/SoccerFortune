@@ -16,10 +16,18 @@
             <li class="navbar-item"><a href="yourBets.html" class="navbar-link">Your Bets</a></li>
             <li class="navbar-item"><a href="buyPoints.html" class="navbar-link">Buy Points</a></li>
             <li class="navbar-item"><a href="redeemPoints.html" class="navbar-link">Redeem Points</a></li>
-            <li class="navbar-item navbar-item-logout"><a href="#logout" id="logout"
-                    class="navbar-link navbar-logout">Logout</a>
-            </li>
         </ul>
+        <div class="navbar-right">
+            <div class="navbar-item-welcome" id="welcome-message">
+                <span id="welcome-message">Welcome, </span>
+            </div>
+            <div class="navbar-item-points">
+                <span id="points-counter">Points: 0</span>
+            </div>
+            <div class="navbar-item navbar-item-logout">
+                <a id="logout" class="navbar-link navbar-logout">Logout</a>
+            </div>
+        </div>
     </nav>
 
     <div class="reedem-points-container">
@@ -38,6 +46,7 @@
     
     <script src="scripts/manage-data.js"></script>
     <script src="scripts/redeem-points.js"></script>
+    <script src="scripts/username-points.js"></script>
     <script>
         if (!getCookie('userId')) {
             window.location.href = 'login.html';

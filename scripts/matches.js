@@ -206,6 +206,7 @@ const initMatches = async (pageNumber) => {
                             if (winnerTeamId && points > 0) {
                                 bet(userId, match.matchID, winnerTeamId, points);
                                 initMatches(actualPage);
+                                updatePointsUsername();
                             } else {
                                 alert('Insert your choose and points')
                             }
@@ -231,6 +232,7 @@ const initMatches = async (pageNumber) => {
                         cancelBetBtn.onclick = () => {
                             cancelBet(userId, match.matchID);
                             initMatches(actualPage);
+                            updatePointsUsername();
                         }
 
                         container.appendChild(cancelBetBtn);

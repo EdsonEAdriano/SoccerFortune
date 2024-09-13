@@ -3,6 +3,8 @@
     background-color: #007bff;
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
 }
 
 .navbar-container {
@@ -11,20 +13,25 @@
     align-items: center;
     max-width: 1100px;
     margin: 0 auto;
+    width: 100%;
 }
 
+/* Logo */
 .navbar-logo img {
     height: 40px;
 }
 
+/* Menu Principal */
 .navbar-menu {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
+    flex-grow: 1;
 }
 
+/* Itens do Menu Principal */
 .navbar-menu li {
     margin: 0 10px;
     position: relative;
@@ -42,10 +49,6 @@
 .navbar-menu a:hover {
     background-color: #0056b3;
     border-radius: 5px;
-}
-
-.navbar-menu .dropdown:hover .dropdown-content {
-    display: block;
 }
 
 /* Dropdown */
@@ -87,6 +90,38 @@
     background-color: #f1f1f1;
 }
 
+/* Novo Container para Boas-vindas, Pontos e Logout */
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-item-welcome {
+    font-size: 16px;
+    color: #ffffff;
+    margin-left: 20px; /* Ajuste o espaçamento conforme necessário */
+}
+
+.navbar-item-points {
+    font-size: 16px;
+    color: #fff;
+    margin-left: 20px; /* Ajuste o espaçamento conforme necessário */
+}
+
+/* Estilo do botão de logout */
+.navbar-item-logout {
+    margin-left: 20px;
+    padding: 8px 15px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar-item-logout:hover {
+    background-color: #0056b3;
+}
+
 /* Responsividade da Navbar */
 @media screen and (max-width: 768px) {
     .navbar-container {
@@ -107,5 +142,9 @@
     .navbar-menu a {
         width: 100%;
         text-align: left;
+    }
+
+    .navbar-right {
+        margin-top: 10px;
     }
 }

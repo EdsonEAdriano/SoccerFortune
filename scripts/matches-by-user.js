@@ -177,6 +177,7 @@ const initMatchesByUser = async (pageNumber) => {
                         cancelBetBtn.onclick = () => {
                             cancelBet(userId, match.matchID);
                             initMatchesByUser(actualPage);
+                            updatePointsUsername();
                         }
 
                         container.appendChild(cancelBetBtn);
