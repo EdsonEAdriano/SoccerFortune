@@ -304,6 +304,8 @@ const verifyBets = async () => {
                 closeBets(userId);
 
                 createAndShowPopup(totalBets);
+
+                updatePointsUsername();
             }
 
 
