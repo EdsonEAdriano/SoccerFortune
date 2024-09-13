@@ -151,7 +151,7 @@ const initMatchesByUser = async (pageNumber) => {
                             }
                             yourBet.style.color = 'red';
                         }
-                    }
+                    } 
 
 
 
@@ -163,6 +163,25 @@ const initMatchesByUser = async (pageNumber) => {
                     matchContainer.appendChild(imagesContainer);
                     matchContainer.appendChild(scoreboard);
                     matchContainer.appendChild(yourBet);
+
+
+
+                    if (!match.matchIsFinished) {
+                        const container = document.createElement('div');
+                        container.className = 'container-bet';
+
+                        
+                        const cancelBetBtn = document.createElement('button')
+                        cancelBetBtn.id = 'cancelBetBtn';
+                        cancelBetBtn.innerText = 'Cancel Bet';
+                        cancelBetBtn.onclick = () => {
+                            cancelBet(userId, match.matchID);
+                            initMatchesByUser(actualPage);
+                        }
+
+                        container.appendChild(cancelBetBtn);
+                        matchContainer.appendChild(container);
+                    }
 
                     teamsBackground.appendChild(matchContainer);
                 });

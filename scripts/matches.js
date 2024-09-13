@@ -35,17 +35,17 @@ const initMatches = async (pageNumber) => {
 
         getBetsByUser(userId, function (user) {
             const bets = user.bets;
-            
+
             const dataBets = allData
-            .map(mainItem => {
-                const secItem = bets.find(sec => sec.matchId === mainItem.matchID);
-            
-                const bet = secItem ? secItem.bet : '';
-                const winnerTeamId = secItem ? secItem.winnerTeamId : '';
-        
-                return { ...mainItem, bet, winnerTeamId };
-            })
-            .filter(item => item !== null);
+                .map(mainItem => {
+                    const secItem = bets.find(sec => sec.matchId === mainItem.matchID);
+
+                    const bet = secItem ? secItem.bet : '';
+                    const winnerTeamId = secItem ? secItem.winnerTeamId : '';
+
+                    return { ...mainItem, bet, winnerTeamId };
+                })
+                .filter(item => item !== null);
 
 
             pageNumber = Math.max(pageNumber, 1) - 1; // Ajuste para zero-based index
@@ -220,7 +220,22 @@ const initMatches = async (pageNumber) => {
                         container.appendChild(openBoxBtn);
                         container.appendChild(betBox);
                         matchContainer.appendChild(container);
-                    } 
+                    } else if (!match.matchIsFinished && match.winnerTeamId !== "") {
+                        const container = document.createElement('div');
+                        container.className = 'container-bet';
+
+                        
+                        const cancelBetBtn = document.createElement('button')
+                        cancelBetBtn.id = 'cancelBetBtn';
+                        cancelBetBtn.innerText = 'Cancel Bet';
+                        cancelBetBtn.onclick = () => {
+                            cancelBet(userId, match.matchID);
+                            initMatches(actualPage);
+                        }
+
+                        container.appendChild(cancelBetBtn);
+                        matchContainer.appendChild(container);
+                    }
 
 
                     teamsBackground.appendChild(matchContainer);

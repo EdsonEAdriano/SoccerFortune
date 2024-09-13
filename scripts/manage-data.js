@@ -163,6 +163,57 @@ const deleteCookie = (nome) => {
 
 
 
+const cancelBet = (userId, matchId) => {
+    let request = indexedDB.open(dbName, 3);
+
+    request.onsuccess = function (event) {
+        let db = event.target.result;
+
+        let transaction = db.transaction([tblName], "readwrite");
+        let objectStore = transaction.objectStore(tblName);
+
+        console.log(objectStore)
+
+        let action = objectStore.get(userId);
+
+        action.onsuccess = function (event) {
+            const user = action.result;
+            
+            const bet = user.bets.find(bet => bet.matchId == matchId);
+            const indexBet = user.bets.findIndex(bets => bets == bet);
+
+            if (indexBet !== -1) {
+                user.bets.splice(indexBet, 1);
+            }   
+
+            user.points += bet.bet;
+
+            if (user) {
+                const putRequest = objectStore.put(user);
+
+                putRequest.onsuccess = function () {
+                    alert('Bet successfully canceled');
+                };
+
+                putRequest.onerror = function (event) {
+                    console.error('Erro ao apostar pontos ', event.target.error);
+                };
+            }
+        };
+
+        action.onerror = function (event) {
+            console.log("Erro ao apostar:", event.target.errorCode);
+            callback(false);  // Trate o erro como usuário não encontrado
+        };
+    };
+
+    request.onerror = function (event) {
+        console.log("Erro ao abrir o banco de dados:", event.target.errorCode);
+        callback(false);  // Trate o erro como usuário não encontrado
+    };
+}
+
+
 const bet = (userId, matchId, winnerTeamId, points) => {
     let request = indexedDB.open(dbName, 3);
 
